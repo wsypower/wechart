@@ -1,0 +1,35 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/my/my"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarTitleText": "活动用房预约",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f1f1f1",
+    "navigationBarBackgroundColor":"#0081ff"
+  },
+  "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom"
+  },
+  "tabBar": {
+    "color": "#666666",
+    "selectedColor": "#0081ff",
+    "list": [
+      {
+        "pagePath":"pages/index/index",
+        "text": "首页",
+        "iconPath": "images/tab/home.png",
+        "selectedIconPath": "images/tab/home_fill.png"
+      },
+      {
+        "pagePath":"pages/my/my",
+        "text": "我的",
+        "iconPath": "images/tab/my.png",
+        "selectedIconPath": "images/tab/my_fill.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,40 @@
+<!--
+ * @Autor: Wsy
+ * @Description: 
+ * @Date: 2020-02-21 09:21:04
+ * @LastEditors: Wsy
+ * @LastEditTime: 2020-02-21 23:52:51
+ -->
+<!-- 获取用户权限 -->
+<!-- <view class="margin-xl padding-xl bg-white radius shadow shadow-lg">
+  <view class="flex justify-center">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class='cu-btn round bg-green shadow'> 获取头像昵称 </button>
+    <block wx:else>
+      <view class='text-center'>
+        <view class="cu-avatar xl round solids" style="background-image:url({{userInfo.avatarUrl}})"></view>
+        <view class="padding">{{userInfo.nickName}}</view>
+      </view>
+    </block>
+  </view>
+</view> -->
+
+<!-- container -->
+<view class="container" hover-class="none" hover-stop-propagation="false">
+  <!-- 搜索框 -->
+  <view class="header  radius shadow bg-white">
+    <!-- 搜索按钮 -->
+    <view class="header_search" hover-class="none" hover-stop-propagation="false">
+      <v-search></v-search>
+    </view>
+    <!-- 下拉选项 -->
+    <view>
+      <van-dropdown-menu>
+        <van-dropdown-item value="{{ value1 }}" options="{{ option1 }}" />
+        <van-dropdown-item value="{{ value2 }}" options="{{ option2 }}" />
+      </van-dropdown-menu>
+    </view>
+  </view>
+</view>
+<view class="body" hover-class="none" hover-stop-propagation="false">
+  1123
+</view>
