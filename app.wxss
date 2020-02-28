@@ -1,16 +1,13 @@
-@import 'colorui/main.wxss';
-@import 'colorui/icon.wxss';
+@import 'style/main.wxss';
+@import 'style/icon.wxss';
 @import 'miniprogram_npm/@vant/weapp/common/index.wxss';
-@import 'style/flex/data-flex.wxss';
 
-view{
-  color: #666666;
-}
-.content-text{
-  color:#ffffff;
-}
 .scrollPage {
 	height: 100vh;
+}
+.scrollContainer {
+	height: 100%;
+	margin-bottom: 15rpx;
 }
 .nav-list {
 	display: flex;
@@ -24,7 +21,7 @@ view{
 	border-radius: 12rpx;
 	width: 45%;
 	margin: 0 2.5% 40rpx;
-	background-image: url(https://image.weilanwl.com/color2.0/cardBg.png);
+	/* background-image: url(https://image.weilanwl.com/color2.0/cardBg.png); */
 	background-size: cover;
 	background-position: center;
 	position: relative;

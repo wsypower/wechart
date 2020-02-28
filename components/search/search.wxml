@@ -3,9 +3,9 @@
  * @Description: 
  * @Date: 2020-02-21 11:11:25
  * @LastEditors: Wsy
- * @LastEditTime: 2020-02-21 11:13:13
+ * @LastEditTime: 2020-02-22 11:59:54
  -->
 <!--components/search/search.wxml-->
 <view>
-    <van-search value="{{ value }}" placeholder="请输入搜索关键词" shape="round" show-action bind:search="onSearch" bind:cancel="onCancel" />
+    <van-search value="{{ value }}"  placeholder="请输入搜索关键词" shape="round" show-action bind:clear="clear" bind:focus="focus" bind:search="onSearch" bind:cancel="onCancel" />
 </view>

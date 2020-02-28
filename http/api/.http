@@ -1,0 +1,6 @@
+
+## getInitData GET
+GET  "http://lfyy.vipgz5.idcfengye.com/api/haircut/getInitData" HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+
+

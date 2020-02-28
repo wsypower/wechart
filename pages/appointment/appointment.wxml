@@ -1,0 +1,85 @@
+<!--
+ * @Autor: Wsy
+ * @Description: 
+ * @Date: 2020-02-23 13:49:57
+ * @LastEditors: Wsy
+ * @LastEditTime: 2020-02-24 06:30:43
+ -->
+<v-custom bgColor="bg-gradual-blue" isCustom="{{true}}">
+    <view slot="content">活动用房预约</view>
+</v-custom>
+<l-toast />
+<view class="appoint_container" style="height:calc(100vh - {{CustomBar}}px" hover-class="none"
+    hover-stop-propagation="false">
+    <!-- ─── 内容区域 ─────────────────────────────────────────── START ──────────── -->
+    <view class="appoint_content">
+        <van-toast id="van-toast" />
+        <!-- ─── 头部状态栏 ────────────────────────────────────────── ─  START  ──────────── -->
+        <view class="cu-bar bg-white solid-bottom shadow" style="z-index: 10;">
+            <view class='action'>
+                <text class='cuIcon-titles text-green'></text>
+                <text class='text-green'>预约时间</text>
+            </view>
+        </view>
+        <!-- ─── 滚动区域 ────────────────────────────────────────── ─  START  ──────────── -->
+        <view class="appoint_content_scroll" hover-class="none" hover-stop-propagation="false">
+            <view class="appoint__scroll">
+                <!-- 内容 start-->
+                <view class="VerticalBox">
+                    <scroll-view class="VerticalNav nav" scroll-y scroll-with-animation scroll-top="{{VerticalNavTop}}">
+                        <view class="cu-item {{day.id==TabCur?'text-green cur':''}}" wx:for="{{list}}" wx:for-item="day"
+                            wx:key="id" bindtap='tabSelect' data-id="{{day.id}}">
+                            {{day.week}} {{day.dayDisp}}
+                        </view>
+                    </scroll-view>
+                    <scroll-view class="VerticalMain" scroll-y scroll-with-animation scroll-into-view="main-{{MainCur}}"
+                        bindscroll="VerticalMain">
+                        <view class="padding-top padding-lr" wx:for="{{list}}" wx:for-item="day" wx:key="id"
+                            id="main-{{day.id}}">
+                            <view class='cu-bar solid-bottom bg-white'>
+                                <view class='action'>
+                                    <text class='cuIcon-title text-green'></text>
+                                    {{day.week}} {{day.dayDisp}}
+                                </view>
+                            </view>
+                            <view class="cu-list menu-avatar">
+                                <view class="cu-item">
+                                    <van-radio-group value="{{ radio }}">
+                                        <van-cell-group>
+                                            <van-cell wx:for="{{day.intervalList}}" wx:for-item="time" wx:key="key"
+                                                title="{{time.interval}}" clickable data-name="{{time.id}}"
+                                                data-interval="{{time.interval}}" bind:click="cellOnclickHandler"
+                                                data-disabled="{{time.sigFlag==2}}" data-parentid="{{day.id}}"
+                                                data-dayvalue="{{day.dayValue}}" data-week="{{day.week}}">
+                                                <van-radio slot="right-icon" name="{{time.id}}"
+                                                    checked-color="var(--green)" disabled="{{time.sigFlag==2}}" />
+                                            </van-cell>
+                                        </van-cell-group>
+                                    </van-radio-group>
+                                </view>
+                            </view>
+                        </view>
+                    </scroll-view>
+                </view>
+                <!-- 内容 end-->
+            </view>
+        </view>
+        <!-- ─── 滚动区域 ────────────────────────────────────────── ─  END    ──────────── -->
+        <!-- ─── 头部状态栏 ────────────────────────────────────────── ─  END  ──────────── -->
+    </view>
+    <!-- ─── 内容区域 ────────────────────────────────────────── ─  END  ──────────── -->
+
+    <!-- ─── 底部     ─────────────────────────────────────────── START ──────────── -->
+    <view class=" footer shadow" hover-class="none" hover-stop-propagation="false">
+        <view class="footer-text text-grey" hover-class="none" hover-stop-propagation="false">
+            <text class='cuIcon-title  text-green' wx:if="{{interval}}"></text>
+            {{interval? "选择":"请选择预约时间"}}
+            <text class="text-green" wx:if="{{week}}">{{ week }}</text>
+            <text class="text-green">{{ interval }}</text>
+        </view>
+        <view class="footer-btn" hover-class="none" hover-stop-propagation="false">
+            <button class="cu-btn round bg-green shadow" bindtap="applyClickHandler">立即预约</button>
+        </view>
+    </view>
+    <!-- ───  底部    ───────────────────────────────────────────  END  ──────────── -->
+</view>

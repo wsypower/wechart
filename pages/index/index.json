@@ -1,7 +1,9 @@
 {
   "usingComponents": {
-    "v-search":"/components/search/search",
+    "van-search": "/miniprogram_npm/@vant/weapp//search/index",
     "van-dropdown-menu": "/miniprogram_npm/@vant/weapp/dropdown-menu/index",
-    "van-dropdown-item": "/miniprogram_npm/@vant/weapp/dropdown-item/index"
+    "van-dropdown-item": "/miniprogram_npm/@vant/weapp/dropdown-item/index",
+    "v-card": "/components/card/index",
+    "van-overlay": "/miniprogram_npm/@vant/weapp/overlay/index"
   }
 }

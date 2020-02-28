@@ -1,0 +1,8 @@
+{
+  "disableScroll": true,
+  "usingComponents": {
+    "index": "/pages/index/index",
+    "my": "/pages/my/my",
+    "van-overlay": "/miniprogram_npm/@vant/weapp/overlay/index"
+  }
+}

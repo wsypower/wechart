@@ -1,0 +1,19 @@
+<!--
+ * @Autor: Wsy
+ * @Description: 
+ * @Date: 2020-02-23 11:10:29
+ * @LastEditors: Wsy
+ * @LastEditTime: 2020-02-23 11:31:09
+ -->
+<!-- ─── 头部状态栏 ────────────────────────────────────────── ─  START  ──────────── -->
+<view class="cu-bar bg-white solid-bottom">
+  <view class='action'>
+    <text class='cuIcon-titles lines-{{color}}'></text>
+    <text class='text-{{color}}'>{{value}}</text>
+  </view>
+  <!-- <view class='action' wx:if="{{status==2}}">
+    <text class='cuIcon-titles text-gray'></text>
+    <text class='text-gray'>预约状态：已下线</text>
+  </view> -->
+</view>
+<!-- ─── 头部状态栏 ────────────────────────────────────────── ─  END  ──────────── -->

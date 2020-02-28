@@ -1,0 +1,140 @@
+<!--
+ * @Autor: Wsy
+ * @Description: 
+ * @Date: 2020-02-22 04:22:04
+ * @LastEditors: Wsy
+ * @LastEditTime: 2020-02-23 21:54:42
+ -->
+<!--pages/details.wxml-->
+<v-custom bgColor="bg-gradual-blue" isBack="{{true}}">
+    <view slot="content">活动用房预约</view>
+</v-custom>
+<view class="details_container" style="height:calc(100vh - {{CustomBar}}px" hover-class="none"
+    hover-stop-propagation="false">
+    <van-toast id="van-toast" />
+    <!-- ─── 内容区域 ─────────────────────────────────────────── START ──────────── -->
+    <view class="details_content" hover-class="none" hover-stop-propagation="false">
+        <!-- ─── 头部状态栏 ────────────────────────────────────────── ─  START  ──────────── -->
+        <view class="cu-bar bg-white solid-bottom shadow" style="z-index: 10;">
+            <view class='action' wx:if="{{detailInfo.status==2}}">
+                <text class='cuIcon-titles lines-green'></text>
+                <text class='lines-green'>预约状态：已发布</text>
+            </view>
+            <view class='action' wx:if="{{detailInfo.status==4}}">
+                <text class='cuIcon-titles text-blue'></text>
+                <text class='text-blue'>预约状态：已结束</text>
+            </view>
+            <view class='action' wx:if="{{detailInfo.status==3}}">
+                <text class='cuIcon-titles text-gray'></text>
+                <text class='text-gray'>预约状态：已下线</text>
+            </view>
+        </view>
+        <!-- ─── 头部状态栏 ────────────────────────────────────────── ─  END  ──────────── -->
+
+        <!-- ─── 滚动区域 ────────────────────────────────────────── ─  START  ──────────── -->
+        <view class="details_content_scroll" hover-class="none" hover-stop-propagation="false">
+            <scroll-view class="details_scroll" scroll-y>
+                <view class="details_top" hover-class="none" hover-stop-propagation="false">
+                    <!-- 内容详细界面 -->
+                    <view class="cu-card dynamic {{isCard?'no-card':''}}">
+                        <!-- 案卷详细信息 -->
+                        <view class="cu-item shadow">
+                            <view class="cu-list menu-avatar">
+                                <view class="cu-item">
+                                    <!-- 已发布 -->
+                                    <view wx:if="{{detailInfo.status==2}}"
+                                        class="cu-avatar round lg bg-gradual-green  cuIcon-form">
+                                    </view>
+                                    <!-- 已结束 -->
+                                    <view wx:if="{{detailInfo.status==4}}"
+                                        class="cu-avatar round lg bg-gradual-blue  cuIcon-form">
+                                    </view>
+                                    <!-- 已下线 -->
+                                    <view wx:if="{{detailInfo.status==3}}"
+                                        class="cu-avatar round lg bg-gradual-gray  cuIcon-form">
+                                    </view>
+
+                                    <view class="content flex-sub">
+                                        <view>{{detailInfo.courtname}}</view>
+                                        <view class="text-gray text-sm flex justify-between">
+                                            服务日期：{{detailInfo.servicestartdayDisp}} - {{detailInfo.serviceenddayDisp}}
+                                        </view>
+                                    </view>
+                                </view>
+                            </view>
+                            <view class="text-content">
+                                {{detailInfo.addressname}}
+                            </view>
+                            <view class="grid flex-sub padding-lr {{isCard?'col-3 grid-square':'col-1'}}"
+                                wx:if="{{images.length}}">
+                                <view class="bg-img only-img">
+                                    <van-image fit="cover" width="100%" height="100%" src="{{images[0]}}" lazy-load
+                                        use-loading-slot radius="4" bind:click="imageCLick" />
+                                </view>
+                            </view>
+                            <view class=" text-gray text-sm text-right padding">
+                                <van-rate value="{{ 5 }}" size="{{ 17 }}" allow-half readonly color="#ffd21e"
+                                    void-color="#eee" void-icon="star" />
+                            </view>
+                            <!-- 评价 star -->
+                            <view class="cu-list menu-avatar comment solids-top">
+                                <!-- 评价 item-star -->
+                                <view class="cu-item" wx:for="{{list}}" wx:key>
+                                    <view class="cu-avatar round" style="background-image:url({{item.headimagepath}});">
+                                    </view>
+                                    <view class="content">
+                                        <view class="text-grey">{{item.personname}}</view>
+                                        <view class="text-gray text-content text-df">
+                                            {{item.advice}}
+                                        </view>
+                                        <view class="margin-top-sm flex justify-between">
+                                            <view class="text-gray text-df">2018年12月4日</view>
+                                            <view>
+                                                <van-rate value="{{ item.starlevel }}" size="{{ 13 }}" allow-half
+                                                    readonly color="#ffd21e" void-color="#eee" void-icon="star" />
+                                            </view>
+                                        </view>
+                                    </view>
+                                </view>
+                            </view>
+                            <!-- 评价 end -->
+                        </view>
+                    </view>
+
+                </view>
+                <!-- <view class="details_timer" hover-class="none" hover-stop-propagation="false">
+
+                </view> -->
+            </scroll-view>
+        </view>
+        <!-- ─── 滚动区域 ────────────────────────────────────────── ─  END    ──────────── -->
+    </view>
+    <!-- ─── 内容区域 ────────────────────────────────────────── ─  END  ──────────── -->
+
+    <!-- ─── 底部     ─────────────────────────────────────────── START ──────────── -->
+    <view class="footer" hover-class="none" hover-stop-propagation="false">
+        <view wx:if="{{detailInfo.status==2}}" class="footer-text text-grey" hover-class="none"
+            hover-stop-propagation="false">
+            当前共可预约 <text class="text-green">{{ 100 }}</text> 人
+        </view>
+        <view wx:if="{{detailInfo.status==4}}" class="footer-text text-grey" hover-class="none"
+            hover-stop-propagation="false">
+            当前共可预约 <text class="text-grey">{{ 0 }}</text> 人
+        </view>
+        <view wx:if="{{detailInfo.status==3}}" class="footer-text text-grey" hover-class="none"
+            hover-stop-propagation="false">
+            当前共可预约 <text class="text-grey">{{ 0 }}</text> 人
+        </view>
+        <view class="footer-btn" hover-class="none" hover-stop-propagation="false">
+            <button class="cu-btn round bg-green shadow" wx:if="{{detailInfo.status==2}}"
+                bindtap="applyClickHandler">立即预约</button>
+            <button class="cu-btn round bg-blue shadow" wx:if="{{detailInfo.status==4}}"
+                bindtap="applyClickHandler">已结束</button>
+            <button class="cu-btn round gray shadow text-grey" wx:if="{{detailInfo.status==3}}"
+                bindtap="applyClickHandler">已下线</button>
+        </view>
+    </view>
+    <!-- ───  底部    ───────────────────────────────────────────  END  ──────────── -->
+</view>
+
+<l-toast placement="right" />

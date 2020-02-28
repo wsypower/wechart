@@ -1,4 +1,0 @@
-/* colorui/components/cu-custom.wxss */
-.content__text{
-    color: #ffffff;
-  }

@@ -1,0 +1,46 @@
+<!--
+ * @Autor: Wsy
+ * @Description: 
+ * @Date: 2020-02-22 22:53:12
+ * @LastEditors: Wsy
+ * @LastEditTime: 2020-02-23 11:55:33
+ -->
+<view bindtap="cardClick"
+  class="l-class card-container {{'card-container-' + type}} {{'card-container-' + type + '-' + position}} {{full?'card-container-full':'card-container-unfull'}}">
+
+
+  <block wx:if="{{type ==='primary' || type ==='cover'}}">
+    <image wx:if="{{!plaintext && image !==''}}"
+      class="l-img-class {{full?'cover-img-full':'cover-img-unfull'}} {{ 'card-img-' + type }} {{ 'card-img-' + type + '-' + position }}"
+      mode="{{imageMode}}" lazy-load="{{true}}" src="{{image}}" catchtap="itemImageClick"></image>
+    <image wx:if="{{!plaintext && image === ''}}"
+      class="l-img-class {{full?'cover-img-full':'cover-img-unfull'}} {{ 'card-img-' + type }} {{ 'card-img-' + type + '-' + position }}"
+      mode="center" lazy-load="{{true}}" src="/images/components/no-pict.png"></image>
+    <view class="card-content">
+      <view class="l-title-class card-title {{'card-title-' + type}}">{{title}}</view>
+      <!-- 已发布 -->
+      <view wx:if="{{ statusType == 2 }}" class="card-title-btn bg-gradual-green  cuIcon-time"></view>
+      <!-- 已结束 -->
+      <view wx:if="{{ statusType == 4 }}" class="card-title-btn bg-gradual-blue cuIcon-roundcheck"></view>
+      <!-- 已下线 -->
+      <view wx:if="{{ statusType == 3 }}" class="card-title-btn bg-grey cuIcon-roundright"></view>
+      <slot />
+    </view>
+  </block>
+
+
+
+  <block wx:if="{{type ==='avatar'}}">
+    <view class="card-avatar-top">
+      <view class="card-avatar-left">
+        <image lazy-load mode="{{imageMode}}" class="l-img-class {{ 'card-img-' + type }}" src='{{image}}'></image>
+        <view class="card-avatar">
+          <text class="l-title-class card-title {{'card-title-' + type}}">{{title}}</text>
+          <text class="describe">{{describe}}</text>
+        </view>
+      </view>
+      <slot name="more" />
+    </view>
+    <slot />
+  </block>
+</view>

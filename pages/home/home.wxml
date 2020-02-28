@@ -1,0 +1,59 @@
+<!--
+ * @Autor: Wsy
+ * @Description: HOME 首页
+ * @Date: 2020-02-22 06:25:56
+ * @LastEditors: Wsy
+ * @LastEditTime: 2020-02-23 21:20:18
+ -->
+<!-- ───  头部   ─────────────────────────────────────────── START ──────────── -->
+<van-overlay bind:click="onClickHide" show="{{ overlay }}" z-index="{{10000}}">
+    <view class="overlay" hover-class="none" hover-stop-propagation="false">
+        <view class="overlay-warp shadow" hover-class="none" hover-stop-propagation="false">
+            <view class="heder_capsule bg-gradual-blue" hover-class="none" hover-stop-propagation="false">
+            </view>
+            <view class="illustration" hover-class="none" hover-stop-propagation="false"></view>
+            <button open-type="getUserInfo" bindgetuserinfo="getUserInfo"
+                class='xxl cu-btn round bg-blue shadow capsule-btn'>获取头像昵称</button>
+        </view>
+    </view>
+</van-overlay>
+
+
+<v-custom bgColor="bg-gradual-blue" wx:if="{{PageCur=='index'}}">
+    <view slot="content" class="title">活动用房预约"</view>
+</v-custom>
+<!-- ───  头部   ─────────────────────────────────────────── START ──────────── -->
+
+
+<!-- ─── 内容区域 ─────────────────────────────────────────── START ──────────── -->
+<block wx:if="{{TabBar}}">
+
+
+    <van-toast id="van-toast" />
+    <view class="home_container" style="height:calc(100vh - {{CustomBar}}px - {{TabBar}}px)" hover-class="none"
+        hover-stop-propagation="false">
+
+        <index wx:if="{{PageCur=='index'}}"></index>
+        <my wx:if="{{PageCur=='my'}}"></my>
+
+    </view>
+</block>
+<!-- ─── 内容区域 ────────────────────────────────────────── ─  END  ──────────── -->
+
+
+<!-- ─── 底部     ─────────────────────────────────────────── START ──────────── -->
+<view class="cu-bar tabbar shadow foot bg-white" id="tab-bar">
+    <view class="{{PageCur=='index'?'action text-blue':' action text-gray'}}" bindtap="navChange" data-cur="index">
+        <view class="{{PageCur=='index'?' cuIcon-homefill':'cuIcon-home'}}"></view>
+        首页
+    </view>
+    <!-- <view class="action text-gray add-action">
+        <button class="cu-btn cuIcon-add bg-gradual-blue shadow"></button>
+        发布
+    </view> -->
+    <view class="{{PageCur=='my'?' action text-blue':' action text-gray'}}" bindtap="navChange" data-cur="my">
+        <view class="{{PageCur=='my'?' cuIcon-myfill ':'cuIcon-my'}}"></view>
+        我的
+    </view>
+</view>
+<!-- ───  底部    ───────────────────────────────────────────  END  ──────────── -->

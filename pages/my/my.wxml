@@ -3,6 +3,19 @@
  * @Description: 
  * @Date: 2020-02-21 09:44:01
  * @LastEditors: Wsy
- * @LastEditTime: 2020-02-21 19:04:28
+ * @LastEditTime: 2020-02-22 07:27:25
  -->
-<!--pages/my/my.wxml-->
+<view class="" hover-class="none" hover-stop-propagation="false">
+    <view class="UCenter-bg bg-gradual-blue">
+        <!-- <image src="/images/logo.png" class="png" mode="widthFix"></image> -->
+        <view class="cu-avatar round xl margin-left"
+            style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big1000{{index+1}}.jpg);">
+            <view class="capsule cu-tag badge {{index%2==0?'cuIcon-female bg-pink':'cuIcon-male bg-blue'}}"></view>
+        </view>
+
+        <view class="margin-top-sm">
+            <text>123123</text>
+        </view>
+        <image src="/images/wave.gif" mode="scaleToFill" class="gif-wave"></image>
+    </view>
+</view>

@@ -1,35 +1,27 @@
 {
   "pages": [
+    "pages/home/home",
     "pages/index/index",
-    "pages/my/my"
+    "pages/my/my",
+    "pages/details/details",
+    "pages/appointment/appointment"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarTitleText": "活动用房预约",
     "navigationBarTextStyle": "white",
     "backgroundColor": "#f1f1f1",
-    "navigationBarBackgroundColor":"#0081ff"
+    "navigationBarBackgroundColor": "#0081ff",
+    "navigationStyle": "custom"
   },
   "usingComponents": {
-    "cu-custom": "/colorui/components/cu-custom"
-  },
-  "tabBar": {
-    "color": "#666666",
-    "selectedColor": "#0081ff",
-    "list": [
-      {
-        "pagePath":"pages/index/index",
-        "text": "首页",
-        "iconPath": "images/tab/home.png",
-        "selectedIconPath": "images/tab/home_fill.png"
-      },
-      {
-        "pagePath":"pages/my/my",
-        "text": "我的",
-        "iconPath": "images/tab/my.png",
-        "selectedIconPath": "images/tab/my_fill.png"
-      }
-    ]
+    "v-custom": "/components/custom/custom",
+    "l-toast": "/components/toast/index",
+    "van-radio": "/miniprogram_npm/@vant/weapp/radio/index",
+    "van-radio-group": "/miniprogram_npm/@vant/weapp/radio-group/index",
+    "van-cell": "/miniprogram_npm/@vant/weapp/cell/index",
+    "van-cell-group": "/miniprogram_npm/@vant/weapp/cell-group/index",
+    "van-toast": "/miniprogram_npm/@vant/weapp/toast/index"
   },
   "sitemapLocation": "sitemap.json"
 }

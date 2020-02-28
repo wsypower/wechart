@@ -1,0 +1,113 @@
+.appoint_container {
+	width: 100%;
+	position: relative;
+}
+.appoint_content {
+	width: 100%;
+	height: calc(100% - calc(120rpx + env(safe-area-inset-bottom) / 2));
+}
+.appoint_content_scroll {
+	width: 100%;
+	height: calc(100% - 100rpx);
+}
+.appoint__scroll {
+	width: 100%;
+	height: 100%;
+}
+.timert_select {
+	width: 100%;
+}
+.footer {
+	width: 100%;
+	height: calc(120rpx + env(safe-area-inset-bottom) / 2);
+	padding-bottom: calc(env(safe-area-inset-bottom) / 2);
+	background-color: #ffffff;
+	position: absolute;
+	bottom: 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+.footer-text {
+	height: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	padding-left: 35rpx;
+}
+.footer-text-de {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+.footer-btn {
+	height: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	padding-right: 35rpx;
+}
+.appoint_scroll {
+	width: 100%;
+	height: 100%;
+}
+.VerticalNav.nav {
+	width: 300rpx;
+	white-space: initial;
+	background-color: #fff;
+	height: 100%;
+}
+
+.VerticalNav.nav .cu-item {
+	width: 100%;
+	text-align: center;
+	background-color: #fff;
+	margin: 0;
+	border: none;
+	height: auto;
+	position: relative;
+}
+.cu-list.menu-avatar > .cu-item {
+	padding-right: 10rpx;
+	height: auto;
+	background-color: var(--white);
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.VerticalNav.nav .cu-item.cur {
+	background-color: #f1f1f1;
+}
+.VerticalNav.nav .cu-item.cur::after {
+	content: '';
+	width: 8rpx;
+	height: 30rpx;
+	border-radius: 10rpx 0 0 10rpx;
+	position: absolute;
+	background-color: currentColor;
+	top: 0;
+	right: 0rpx;
+	bottom: 0;
+	margin: auto;
+}
+.VerticalBox {
+	display: flex;
+	height: 100%;
+}
+.VerticalMain {
+	background-color: #f1f1f1;
+}
+.timer_title {
+	color: var(--grey);
+}
+.cu-list.menu-avatar > .cu-item {
+	display: block;
+	padding-right: 10rpx;
+	height: auto;
+	background-color: var(--white);
+	justify-content: flex-end;
+	align-items: center;
+}

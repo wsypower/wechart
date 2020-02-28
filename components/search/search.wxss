@@ -1,1 +1,4 @@
 /* components/search/search.wxss */
+.van-search__action > view{
+    color:#aaaaaa
+}

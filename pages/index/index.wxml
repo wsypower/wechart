@@ -1,40 +1,51 @@
 <!--
  * @Autor: Wsy
- * @Description: 
+ * @Description: 首页
  * @Date: 2020-02-21 09:21:04
  * @LastEditors: Wsy
- * @LastEditTime: 2020-02-21 23:52:51
+ * @LastEditTime: 2020-02-23 05:55:21
  -->
-<!-- 获取用户权限 -->
-<!-- <view class="margin-xl padding-xl bg-white radius shadow shadow-lg">
-  <view class="flex justify-center">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class='cu-btn round bg-green shadow'> 获取头像昵称 </button>
-    <block wx:else>
-      <view class='text-center'>
-        <view class="cu-avatar xl round solids" style="background-image:url({{userInfo.avatarUrl}})"></view>
-        <view class="padding">{{userInfo.nickName}}</view>
-      </view>
-    </block>
-  </view>
-</view> -->
+<view class="index_page" hover-class="none" hover-stop-propagation="false">
 
-<!-- container -->
-<view class="container" hover-class="none" hover-stop-propagation="false">
-  <!-- 搜索框 -->
-  <view class="header  radius shadow bg-white">
-    <!-- 搜索按钮 -->
-    <view class="header_search" hover-class="none" hover-stop-propagation="false">
-      <v-search></v-search>
-    </view>
-    <!-- 下拉选项 -->
-    <view>
+  <!-- 头部 -->
+  <view class="header shadow" hover-class="none" hover-stop-propagation="false">
+    <!-- 搜索框 -->
+    <van-search value="{{ value }}" placeholder="请输入搜索关键词" shape="round" show-action bind:clear="onClear"
+      bind:focus="onFocus" bind:search="onSearch" bind:cancel="onCancel" bind:change="onChange" />
+    <!-- 下拉框 -->
+    <view hover-class="none" hover-stop-propagation="false">
       <van-dropdown-menu>
-        <van-dropdown-item value="{{ value1 }}" options="{{ option1 }}" />
-        <van-dropdown-item value="{{ value2 }}" options="{{ option2 }}" />
+        <van-dropdown-item id="community" value="{{ community }}" options="{{ communityOption }}"
+          bind:change="communityChangeHandle" />
+        <van-dropdown-item id="state" value="{{ state }}" options="{{ stateOption }}" bind:change="stateChangeHandle" />
       </van-dropdown-menu>
     </view>
   </view>
-</view>
-<view class="body" hover-class="none" hover-stop-propagation="false">
-  1123
+  <!-- 主体内容 -->
+  <view class="main" hover-class="none" hover-stop-propagation="false">
+   
+    <!-- <van-overlay show="{{ authorization }}" bind:click="onClickHide">
+      <view class="wrapper">
+        <view class="block" catch:tap="noop" />
+      </view>
+    </van-overlay> -->
+    <image wx:if="{{nodata}}" class="nodata" src="/images/nodata.png" mode="aspectFit|aspectFill|widthFix">
+    </image>
+    <scroll-view scroll-y class="scrollContainer " bindscrolltolower="scrollToLower" refresher-enabled
+      refresher-triggered="{{refresher}}" bindrefresherrefresh="refresherrefresh">
+      <!-- 循环列表 -->
+      <view class="card-primary-item" hover-class="none" hover-stop-propagation="false" wx:for="{{list}}" wx:key="id">
+        <v-card type="primary" title="{{item.courtname}}" statusType="{{item.status}}" cardId="{{item.id}}"
+          l-img-class="right-card" position="left" image="{{item.image[0]}}" imagesList="{{item.image}}">
+          <view class="content">{{item.addressname}}</view>
+        </v-card>
+      </view>
+      <!-- <view style="width: 100rpx;height: 2000rpx;background-color: red;">
+
+      </view> -->
+
+
+      <view class="scroll-bootom" hover-class="none" hover-stop-propagation="false"></view>
+    </scroll-view>
+  </view>
 </view>

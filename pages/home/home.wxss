@@ -1,0 +1,40 @@
+.home_container {
+  width: 100%;
+}
+.title {
+  color: #ffffff;
+}
+.overlay {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  align-items: center;
+}
+.overlay-warp {
+  width: 650rpx;
+  height: 1000rpx;
+  background-color: #fff;
+  display: flex;
+  border-radius: 15rpx;
+  flex-direction: column;
+  align-items: center;
+}
+.heder_capsule {
+  width: 200rpx;
+  height: 45rpx;
+  background-color: #fff;
+  border-radius: 0rpx 0rpx 50rpx 50rpx;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  padding: 0rpx 30rpx;
+  font-size: 26rpx;
+}
+.illustration {
+  height: 800rpx;
+  width: 100%;
+}
+.capsule-btn {
+  width: 400rpx;
+  height: 74rpx;
+}

@@ -3,9 +3,9 @@
  * @Description: 
  * @Date: 2020-02-21 09:53:36
  * @LastEditors: Wsy
- * @LastEditTime: 2020-02-21 09:56:07
+ * @LastEditTime: 2020-02-22 05:53:15
  -->
-<view class="cu-bar tabbar margin-bottom-xl bg-white">
+ <view class="cu-bar tabbar margin-bottom-xl bg-white">
   <view class="action text-green">
     <view class="cuIcon-homefill"></view> 首页
   </view>
@@ -16,12 +16,13 @@
     <button class="cu-btn cuIcon-add bg-green shadow"></button>
     发布
   </view>
+
   <view class="action text-gray">
     <view class="cuIcon-cart">
       <view class="cu-tag badge">99</view>
     </view>
-    购物车
   </view>
+
   <view class="action text-gray">
     <view class="cuIcon-my">
       <view class="cu-tag badge"></view>
