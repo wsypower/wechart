@@ -1,0 +1,89 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-03-02 19:54:11
+ * @LastEditTime: 2020-03-03 12:46:46
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /WeChatProject/pages/orderdetail/orderdetail.wxml
+ -->
+<v-custom bgColor="bg-gradual-blue" isBack="{{true}}">
+    <view slot="content">活动用房预约</view>
+</v-custom>
+<view class="order-page-container" style="height:calc(100vh - {{CustomBar}}px">
+    <scroll-view class="order-page-scroll" scroll-y>
+        <view class="cu-bar bg-white solid-bottom">
+            <view class='action'>
+                <text class='cuIcon-titles text-{{color}}'></text>
+                <text class='text-{{color}}'>预约时间: {{ordertime}}</text>
+            </view>
+        </view>
+        <view class="cu-card case {{isCard?'no-card':''}}">
+            <view class="cu-item shadow">
+                <view class="image">
+                    <van-image wx:if="{{images}}" width="100%" height="400rpx" src="{{images[0]}}" lazy-load
+                        slot="loading" fit="cover" catchtap="imageClickHandler" />
+                    <view wx:if="{{!images}}" class="no_images" hover-class="none" hover-stop-propagation="false">
+                        <van-image width="520rpx" height="304rpx" src="/images/noimage.png" lazy-load slot="loading"
+                            fit="cover" />
+                    </view>
+                    <view wx:if="{{status==1}}" class="cu-tag bg-{{color}}">待确认</view>
+                    <view wx:if="{{status==2}}" class="cu-tag bg-{{color}}">待评价</view>
+                    <view wx:if="{{images}}" class="cu-bar bg-shadeBottom">
+                        <text class="text-cut">{{detailInfo.addressname}}</text>
+                    </view>
+                    <view wx:if="{{!images}}" class="cu-bar text-grey">
+                        <text class="text-cut">{{detailInfo.addressname}}</text>
+                    </view>
+                </view>
+                <view class="cu-list menu-avatar">
+                    <view class="cu-item">
+                        <view class="content flex-sub">
+                            <view class="text-grey">{{detailInfo.courtname}}</view>
+                            <view class="text-gray text-sm flex justify-between">
+                                服务时间：{{detailInfo.servicestartdayDisp}} - {{detailInfo.serviceenddayDisp}}
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <!-- 评价 -->
+                <view class="cu-list menu-avatar comment solids-top" wx:if="{{status==2}}">
+                    <view class="cu-item">
+                        <view class="content">
+                            <view class="text-grey">
+                                星评
+                            </view>
+                            <view class="text-gray  text-sm ">可评星一星到五星，可包含半星</view>
+                            <view class="item-rate" hover-class="none" hover-stop-propagation="false">
+                                <van-rate value="{{ value }}" size="{{ 25 }}" bind:change="onChange" allow-half />
+                            </view>
+                        </view>
+                    </view>
+                    <view class="cu-item">
+                        <view class="content">
+                            <view class="text-grey">评价</view>
+                            <view class="text-gray  text-sm ">请给{{detailInfo.courtname}}的服务做简单的评价</view>
+                            <view class="field_warp" hover-class="none" hover-stop-propagation="false">
+                                <van-field value="{{ evaluation }}" type="textarea" autosize placeholder="请输入评价"
+                                    border="{{false}}" bind:change="evaluationOnChange" />
+                            </view>
+                            <!-- <textarea placeholder="placeholder颜色是红色的" placeholder-style="color:red;" /> -->
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="order-btn">
+            <view class="padding flex flex-direction">
+                <button wx:if="{{status==1}}" class="cu-btn round bg-{{color}}  lg "
+                    bindtap="buttonCallback">完成</button>
+                <button wx:if="{{status==2}}" class="cu-btn round bg-{{color}}  lg "
+                    bindtap="evaluationBtnHandler">评价</button>
+                <!-- bg-grey -->
+                <button wx:if="{{status==1}}" class="cu-btn round line-grey  margin-tb-sm lg"
+                    bindtap="cancelCallback">取消</button>
+            </view>
+        </view>
+    </scroll-view>
+</view>
+<l-toast placement="right" />
+<van-dialog id="van-dialog" />

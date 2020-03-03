@@ -27,8 +27,14 @@ Page({
     interval: "",
     parentid: "",
     week: "",
-    dayValue: ""
+    dayValue: "",
+    orderallowcount: ""
   },
+  /**
+   * @description 根据flag结果修改返回字符
+   * @author weiyafei
+   * @date 2020-02-28
+   */
   /**
    * 提交预约
    */
@@ -73,14 +79,14 @@ Page({
    * @returns
    */
   cellOnclickHandler(event) {
-    console.log(event);
     const {
       name,
       disabled,
       interval,
       parentid,
       week,
-      dayvalue
+      dayvalue,
+      orderallowcount
     } = event.currentTarget.dataset;
     if (disabled) {
       return;
@@ -90,7 +96,8 @@ Page({
         radio: "",
         interval: "",
         week: "",
-        dayvalue: ""
+        dayvalue: "",
+        orderallowcount: ""
       });
       return;
     }
@@ -100,7 +107,8 @@ Page({
       parentid,
       TabCur: parentid,
       week,
-      dayvalue
+      dayvalue,
+      orderallowcount
     });
   },
   /**

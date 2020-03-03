@@ -3,6 +3,8 @@
   "usingComponents": {
     "index": "/pages/index/index",
     "my": "/pages/my/my",
-    "van-overlay": "/miniprogram_npm/@vant/weapp/overlay/index"
+    "van-overlay": "/miniprogram_npm/@vant/weapp/overlay/index",
+    "van-transition": "/miniprogram_npm/@vant/weapp/transition/index",
+    "van-image": "/miniprogram_npm/@vant/weapp/image/index"
   }
 }

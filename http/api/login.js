@@ -19,15 +19,18 @@ class Login extends HTTP {
    * @memberof Login
    */
   login() {
-    this._checkSession()
-      .then(() => this._reReg())
+    return this._checkSession()
+      .then(() => {
+        return this._reReg();
+      })
       .then(({ code }) => this._getOpenId(code))
       .then(({ personid, openid }) => {
         this.openid = openid;
         this._setStor("openid", openid);
         this._setStor("personid", personid);
+        return personid;
       })
-      .catch(err => console.error(err));
+      .catch(err => Promise.reject(err));
   }
   /**
    * @description 发送 res.code 到后台换取 openId, sessionKey, unionId
@@ -52,17 +55,12 @@ class Login extends HTTP {
         success() {
           //session_key 未过期，并且在本生命周期一直有效
           const openid = _this._getStor("openid");
+          const personid = _this._getStor("personid");
           // 如果清理过缓存找不到personid，就在去直接登录一遍
-          if (!openid) {
-            _this
-              ._reReg()
-              .then(({ code }) => _this._getOpenId(code))
-              .then(({ personid, openid }) => {
-                _this.openid = openid;
-                _this._setStor("openid", openid);
-                _this._setStor("personid", personid);
-              });
+          if (!openid || !personid) {
+            return resolve();
           }
+          return reject(personid);
         },
         fail() {
           // session_key 已经失效，需要重新执行登录流程

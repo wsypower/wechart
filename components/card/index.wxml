@@ -17,7 +17,8 @@
       class="l-img-class {{full?'cover-img-full':'cover-img-unfull'}} {{ 'card-img-' + type }} {{ 'card-img-' + type + '-' + position }}"
       mode="center" lazy-load="{{true}}" src="/images/components/no-pict.png"></image>
     <view class="card-content">
-      <view class="l-title-class card-title {{'card-title-' + type}}">{{title}}</view>
+      <view class="l-title-class card-title {{'card-title-' + type}}">
+        {{title}}</view>
       <!-- 已发布 -->
       <view wx:if="{{ statusType == 2 }}" class="card-title-btn bg-gradual-green  cuIcon-time"></view>
       <!-- 已结束 -->
@@ -36,7 +37,8 @@
         <image lazy-load mode="{{imageMode}}" class="l-img-class {{ 'card-img-' + type }}" src='{{image}}'></image>
         <view class="card-avatar">
           <text class="l-title-class card-title {{'card-title-' + type}}">{{title}}</text>
-          <text class="describe">{{describe}}</text>
+          <text class="describe">
+            <van-icon name="award-o" color="#007EFC" size="30rpx" />{{describe}}</text>
         </view>
       </view>
       <slot name="more" />

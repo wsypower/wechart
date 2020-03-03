@@ -9,6 +9,13 @@ import getDetails from "../../http/api/details";
 import Toast from "../../miniprogram_npm/@vant/weapp/toast/toast";
 const app = getApp();
 Page({
+  onShareAppMessage() {
+    return {
+      title: "活动用房预约",
+      imageUrl: "/images/share.jpg",
+      path: "/pages/home/home"
+    };
+  },
   /**
    * 页面的初始数据
    */
@@ -20,7 +27,10 @@ Page({
     CustomBar: app.globalData.CustomBar,
     value: 4.5,
     detailInfo: null,
-    list: null
+    list: null,
+    starlevelAvg: null,
+    orderAllowNumber: null,
+    orderedtime: null
   },
   applyClickHandler() {
     const status = this.data.detailInfo.status;
@@ -53,15 +63,18 @@ Page({
   },
   getDetails() {
     const addressid = this.data.detailsId;
-    const personid = wx.getStorageSync("personid");
     return getDetails
       .getAddressInfo({ addressid })
-      .then(({ detailInfo, list }) => {
+      .then(({ detailInfo, list, orderedtime }) => {
         console.log(detailInfo);
         console.log(list);
+        orderedtime = orderedtime ? orderedtime : false;
+        console.log("orderedtime", orderedtime);
+
         this.setData({
           detailInfo,
-          list
+          list,
+          orderedtime
         });
       });
   },
@@ -89,49 +102,23 @@ Page({
       mask: false,
       message: "加载中..."
     });
-    const { detailsId, images } = await this.PageEventEmitChannel("passValue");
+    const {
+      detailsId,
+      images,
+      starlevelAvg,
+      orderAllowNumber
+    } = await this.PageEventEmitChannel("passValue");
     this.setData({
       detailsId,
-      images
+      images,
+      starlevelAvg,
+      orderAllowNumber
     });
+    console.log(this.data.starlevelAvg);
+    console.log(this.data.orderAllowNumber);
     await this.getDetails();
-  },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
     Toast.clear();
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {},
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {},
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {},
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function() {},
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {},
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function() {}
+  }
 });
 
 /* 

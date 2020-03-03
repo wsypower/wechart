@@ -22,8 +22,8 @@ class HTTP {
         "content-type": "application/x-www-form-urlencoded"
       },
       success: res => {
-        const code = res.statusCode.toString();
-        resolve(res.data.result);
+        const result = res.data.result.result;
+        result == "sucess" ? resolve(res.data.result) : reject(res.data.result);
       },
       fail: err => {
         reject(err);

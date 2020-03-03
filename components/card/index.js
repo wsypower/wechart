@@ -14,6 +14,8 @@ Component({
     multipleSlots: true // 在组件定义时的选项中启用多slot支持
   },
   properties: {
+    starlevelAvg: Number,
+    orderAllowNumber: Number,
     statusType: String,
     cardId: String,
     image: String,
@@ -62,12 +64,16 @@ Component({
     cardClick() {
       const detailsId = this.data.cardId;
       const images = this.data.imagesList;
+      const starlevelAvg = this.data.starlevelAvg;
+      const orderAllowNumber = this.data.orderAllowNumber;
       wx.navigateTo({
         url: `/pages/details/details`,
         success: result => {
           result.eventChannel.emit("passValue", {
             detailsId,
-            images
+            images,
+            starlevelAvg,
+            orderAllowNumber
           });
         }
       });

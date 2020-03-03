@@ -34,7 +34,16 @@ App({
     /*=============================================
     =                      登录                    =
     =============================================*/
-    user_login.login();
+    user_login
+      .login()
+      .then(res => {
+        console.log("appjs=======================");
+        this.globalData.personid = res;
+      })
+      .catch(err => {
+        console.log("appjs=======================++++++++++++++++++");
+        this.globalData.personid = err;
+      });
     // 获取用户信息
 
     /*=============================================

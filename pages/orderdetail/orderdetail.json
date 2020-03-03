@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "van-image": "/miniprogram_npm/@vant/weapp/image/index",
+    "van-rate": "/miniprogram_npm/@vant/weapp/rate/index",
+    "van-field": "/miniprogram_npm/@vant/weapp/field/index",
+    "van-dialog": "/miniprogram_npm/@vant/weapp/dialog/index"
+  },
+  "disableScroll": true
+}

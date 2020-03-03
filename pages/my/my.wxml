@@ -2,20 +2,94 @@
  * @Autor: Wsy
  * @Description: 
  * @Date: 2020-02-21 09:44:01
- * @LastEditors: Wsy
- * @LastEditTime: 2020-02-22 07:27:25
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-03-03 12:12:15
  -->
-<view class="" hover-class="none" hover-stop-propagation="false">
+<view class="my_page" hover-class="none" hover-stop-propagation="false" style="height:calc(100% + {{CustomBar}}px)">
+    <!-- 头部 -->
     <view class="UCenter-bg bg-gradual-blue">
         <!-- <image src="/images/logo.png" class="png" mode="widthFix"></image> -->
-        <view class="cu-avatar round xl margin-left"
-            style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big1000{{index+1}}.jpg);">
-            <view class="capsule cu-tag badge {{index%2==0?'cuIcon-female bg-pink':'cuIcon-male bg-blue'}}"></view>
+        <view class="cu-avatar round xl  shadow" style="background-image:url({{userInfo.avatarUrl}});">
+            <view
+                class="cu-tag-size capsule cu-tag badge shadow {{userInfo.gender==1?'cuIcon-male bg-blue':'cuIcon-female bg-pink'}}">
+            </view>
         </view>
 
         <view class="margin-top-sm">
-            <text>123123</text>
+            <text class="texr-white text-shadow text-xl">{{userInfo.nickName}}</text>
         </view>
         <image src="/images/wave.gif" mode="scaleToFill" class="gif-wave"></image>
     </view>
+    <!-- 主体 -->
+    <view class="mypage_container">
+
+        <van-tabs active="{{ active }}" bind:change="onChange" swipeable animated border="{{false}}"
+            class="may_page_custom_nav" lazy-render>
+            <van-tab wx:for="{{tabs}}" wx:key="{{nav}}" wx:for-item="navs" name="{{navs.status}}"
+                data-status="{{navs.status}}" title="{{navs.nav}}" class="nav-class custom-class">
+                <scroll-view class="nav-item-scroll" scroll-y>
+                    <!-- 在没有图片的情况下显示 -->
+                    <view class="no_list" wx:if="{{navs.data.length==0}}" hover-class="none"
+                        hover-stop-propagation="false">
+                        <image src="/images/nodata.png" mode="widthFix" lazy-load="false"></image>
+                    </view>
+                    <!-- 列表 -->
+                    <view class="scroll-item-card" data-id="{{navsPanl.id}}" data-status="{{navs.status}}"
+                        data-color="{{navsPanl.color}}" data-addressid="{{navsPanl.addressid}}"
+                        data-ordertime="{{navsPanl.ordertime}}" data-images="{{navsPanl.images}}" wx:for="{{navs.data}}"
+                        wx:for-item="navsPanl" wx:key bind:tap="clickCardHandler">
+                        <view class="cu-card article {{isCard?'no-card':''}} ">
+                            <view class="cu-item shadow {{navsPanl.status==3?'cancel-bg':''}}">
+                                <view class="title" wx:if="{{navsPanl.status!=3}}">
+                                    <view class=" text-cut">{{navsPanl.courtname}}</view>
+                                </view>
+                                <view class="title" wx:if="{{navsPanl.status==3}}">
+                                    <view class="text-cut text-gray">{{navsPanl.courtname}}(已取消)</view>
+                                </view>
+                                <view class="content">
+                                    <image wx:if="{{navsPanl.images}}" src="{{navsPanl.images[0]}}" mode="aspectFill"
+                                        data-img="{{navsPanl.images}}" catchtap="imageClickHandler">
+                                    </image>
+                                    <image wx:if="{{!navsPanl.images}}" src="/images/components/no-pict.png"
+                                        mode="aspectFill" data-img="{{navsPanl.images}}">
+                                    </image>
+                                    <view class="desc">
+                                        <view class="text-content">
+                                            {{navsPanl.addressname}}
+                                        </view>
+                                        <view>
+                                            <view class="cu-tag bg-{{navsPanl.color}} light  round">
+                                                预约时间: {{navsPanl.ordertime}}
+                                            </view>
+                                        </view>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </scroll-view>
+            </van-tab>
+        </van-tabs>
+    </view>
 </view>
+
+<!-- <view class="padding flex text-center text-grey bg-white shadow-warp">
+    <view class="flex flex-sub flex-direction solid-right">
+        <view class="text-xxl text-orange">123</view>
+        <view class="margin-top-sm">
+            待参加
+        </view>
+    </view>
+    <view class="flex flex-sub flex-direction solid-right">
+        <view class="text-xxl text-blue">3</view>
+        <view class="margin-top-sm">
+            已参加
+        </view>
+    </view>
+    <view class="flex flex-sub flex-direction">
+        <view class="text-xxl text-green">12</view>
+        <view class="margin-top-sm">
+            未参加
+        </view>
+    </view>
+</view> -->

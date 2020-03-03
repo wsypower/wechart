@@ -33,8 +33,18 @@
 .illustration {
   height: 800rpx;
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.illustration image {
+  width: 80%;
+  background-color: #fff;
 }
 .capsule-btn {
   width: 400rpx;
   height: 74rpx;
+}
+.hiden {
+  display: none;
 }

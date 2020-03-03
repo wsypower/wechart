@@ -18,7 +18,7 @@
         <view class="cu-bar bg-white solid-bottom shadow" style="z-index: 10;">
             <view class='action'>
                 <text class='cuIcon-titles text-green'></text>
-                <text class='text-green'>预约时间</text>
+                <text class='text-green'>预约时间选择</text>
             </view>
         </view>
         <!-- ─── 滚动区域 ────────────────────────────────────────── ─  START  ──────────── -->
@@ -47,10 +47,12 @@
                                     <van-radio-group value="{{ radio }}">
                                         <van-cell-group>
                                             <van-cell wx:for="{{day.intervalList}}" wx:for-item="time" wx:key="key"
-                                                title="{{time.interval}}" clickable data-name="{{time.id}}"
-                                                data-interval="{{time.interval}}" bind:click="cellOnclickHandler"
-                                                data-disabled="{{time.sigFlag==2}}" data-parentid="{{day.id}}"
-                                                data-dayvalue="{{day.dayValue}}" data-week="{{day.week}}">
+                                                title="{{time.sigFlag==2?'预约人数已满':time.interval}}" clickable
+                                                data-name="{{time.id}}" data-interval="{{time.interval}}"
+                                                bind:click="cellOnclickHandler" data-disabled="{{time.sigFlag==2}}"
+                                                data-parentid="{{day.id}}" data-dayvalue="{{day.dayValue}}"
+                                                data-orderAllowCount="{{time.orderAllowCount}}" data-week="{{day.week}}"
+                                                title-class="{{time.sigFlag==2? 'text-grey' : 'text-black' }}">
                                                 <van-radio slot="right-icon" name="{{time.id}}"
                                                     checked-color="var(--green)" disabled="{{time.sigFlag==2}}" />
                                             </van-cell>
@@ -73,9 +75,12 @@
     <view class=" footer shadow" hover-class="none" hover-stop-propagation="false">
         <view class="footer-text text-grey" hover-class="none" hover-stop-propagation="false">
             <text class='cuIcon-title  text-green' wx:if="{{interval}}"></text>
-            {{interval? "选择":"请选择预约时间"}}
+            {{interval? "":"请选择预约时间"}}
             <text class="text-green" wx:if="{{week}}">{{ week }}</text>
             <text class="text-green">{{ interval }}</text>
+            {{interval? "（还可预约":""}}
+            <text class="text-green" wx:if="{{orderallowcount}}">{{ orderallowcount }}人</text>
+            {{interval? "）":""}}
         </view>
         <view class="footer-btn" hover-class="none" hover-stop-propagation="false">
             <button class="cu-btn round bg-green shadow" bindtap="applyClickHandler">立即预约</button>

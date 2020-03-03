@@ -11,7 +11,12 @@
         <view class="overlay-warp shadow" hover-class="none" hover-stop-propagation="false">
             <view class="heder_capsule bg-gradual-blue" hover-class="none" hover-stop-propagation="false">
             </view>
-            <view class="illustration" hover-class="none" hover-stop-propagation="false"></view>
+            <view class="illustration" hover-class="none" hover-stop-propagation="false">
+                <image class="" src="/images/rote.png" mode="widthFix" lazy-load="false" binderror="" bindload="">
+
+                </image>
+                <!-- <van-image width="423rpx" height="376.5rpx" src="/images/rote.png" /> -->
+            </view>
             <button open-type="getUserInfo" bindgetuserinfo="getUserInfo"
                 class='xxl cu-btn round bg-blue shadow capsule-btn'>获取头像昵称</button>
         </view>
@@ -20,7 +25,7 @@
 
 
 <v-custom bgColor="bg-gradual-blue" wx:if="{{PageCur=='index'}}">
-    <view slot="content" class="title">活动用房预约"</view>
+    <view slot="content" class="title">活动用房预约</view>
 </v-custom>
 <!-- ───  头部   ─────────────────────────────────────────── START ──────────── -->
 
@@ -33,9 +38,12 @@
     <view class="home_container" style="height:calc(100vh - {{CustomBar}}px - {{TabBar}}px)" hover-class="none"
         hover-stop-propagation="false">
 
-        <index wx:if="{{PageCur=='index'}}"></index>
-        <my wx:if="{{PageCur=='my'}}"></my>
-
+        <!-- <index wx:if="{{PageCur=='index'}}"></index>
+        <my wx:if="{{PageCur=='my'}}"></my> -->
+        <index class="{{PageCur=='index'?'':'hiden'}}"></index>
+        <my class="{{PageCur=='my'?'':'hiden'}}" TabBar="{{TabBar}}" wx:if="{{personid}}" CustomBar="{{CustomBar}}"
+            userInfo="{{userInfo}}">
+        </my>
     </view>
 </block>
 <!-- ─── 内容区域 ────────────────────────────────────────── ─  END  ──────────── -->

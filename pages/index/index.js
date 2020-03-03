@@ -14,6 +14,9 @@ import user_login from "../../http/api/login";
 import Toast from "../../miniprogram_npm/@vant/weapp/toast/toast";
 const app = getApp();
 Component({
+  options: {
+    styleIsolation: "shared"
+  },
   data: {
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
@@ -29,7 +32,7 @@ Component({
     // 社区-Code
     community: "",
     // 状态-Code
-    state: "",
+    state: "2",
     // 搜索输入结果
     value: "",
     // 暂无数据
@@ -167,9 +170,11 @@ Component({
       return getList.getInitSelect().then(({ areaList, statusList }) => {
         const area = renameKeys({ areaname: "text", id: "value" }, areaList);
         const status = renameKeys({ value: "text", key: "value" }, statusList);
+        const states = status[0].value;
         this.setData({
           communityOption: [{ text: "全部社区", value: "" }, ...area],
-          stateOption: [{ text: "全部", value: "" }, ...status]
+          stateOption: [...status],
+          state: states
         });
       });
     },
@@ -211,7 +216,6 @@ Component({
           }
         });
     }
-
     // ─── GETDATA ──────────────────────────────────────────────────  END    ────────────
   },
   lifetimes: {
@@ -225,7 +229,7 @@ Component({
     async show() {
       // 页面被展示
       console.log("页面被展示1");
-      // await this.asyncGetSelect();
+      this.asyncGetAddressList();
       console.log("页面被展示2");
     },
     hide() {

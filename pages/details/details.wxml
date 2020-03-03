@@ -2,8 +2,8 @@
  * @Autor: Wsy
  * @Description: 
  * @Date: 2020-02-22 04:22:04
- * @LastEditors: Wsy
- * @LastEditTime: 2020-02-23 21:54:42
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-03-03 16:13:30
  -->
 <!--pages/details.wxml-->
 <v-custom bgColor="bg-gradual-blue" isBack="{{true}}">
@@ -73,7 +73,7 @@
                                 </view>
                             </view>
                             <view class=" text-gray text-sm text-right padding">
-                                <van-rate value="{{ 5 }}" size="{{ 17 }}" allow-half readonly color="#ffd21e"
+                                <van-rate value="{{ starlevelAvg }}" size="{{ 17 }}" allow-half readonly color="#ffd21e"
                                     void-color="#eee" void-icon="star" />
                             </view>
                             <!-- 评价 star -->
@@ -88,9 +88,9 @@
                                             {{item.advice}}
                                         </view>
                                         <view class="margin-top-sm flex justify-between">
-                                            <view class="text-gray text-df">2018年12月4日</view>
+                                            <view class="text-gray text-df">{{item.evaluatetime}}</view>
                                             <view>
-                                                <van-rate value="{{ item.starlevel }}" size="{{ 13 }}" allow-half
+                                                <van-rate value="{{ item.starlevel||5 }}" size="{{ 13 }}" allow-half
                                                     readonly color="#ffd21e" void-color="#eee" void-icon="star" />
                                             </view>
                                         </view>
@@ -113,20 +113,23 @@
 
     <!-- ─── 底部     ─────────────────────────────────────────── START ──────────── -->
     <view class="footer" hover-class="none" hover-stop-propagation="false">
-        <view wx:if="{{detailInfo.status==2}}" class="footer-text text-grey" hover-class="none"
+        <!-- 预约过的--显示时间 -->
+        <view wx:if="{{orderedtime}}" class="footer-text text-grey" hover-class="none" hover-stop-propagation="false">
+            已预约<text class="text-green text-pl"> {{ orderedtime }} </text>
+        </view>
+        <view wx:if="{{detailInfo.status==2 && !orderedtime}}" class="footer-text text-grey" hover-class="none"
             hover-stop-propagation="false">
-            当前共可预约 <text class="text-green">{{ 100 }}</text> 人
+            当前共可预约 <text class="text-green">{{ orderAllowNumber }}</text> 人
         </view>
         <view wx:if="{{detailInfo.status==4}}" class="footer-text text-grey" hover-class="none"
             hover-stop-propagation="false">
-            当前共可预约 <text class="text-grey">{{ 0 }}</text> 人
+            <!-- 当前共可预约 <text class="text-grey">{{ orderAllowNumber }}</text> 人 -->
         </view>
         <view wx:if="{{detailInfo.status==3}}" class="footer-text text-grey" hover-class="none"
             hover-stop-propagation="false">
-            当前共可预约 <text class="text-grey">{{ 0 }}</text> 人
         </view>
         <view class="footer-btn" hover-class="none" hover-stop-propagation="false">
-            <button class="cu-btn round bg-green shadow" wx:if="{{detailInfo.status==2}}"
+            <button class="cu-btn round bg-green shadow" wx:if="{{detailInfo.status==2 && !orderedtime}}"
                 bindtap="applyClickHandler">立即预约</button>
             <button class="cu-btn round bg-blue shadow" wx:if="{{detailInfo.status==4}}"
                 bindtap="applyClickHandler">已结束</button>

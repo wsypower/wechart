@@ -39,6 +39,37 @@ class Details extends HTTP {
       }
     });
   }
+  getOrderDetailInfo(orderid) {
+    return this.request({
+      url: "getOrderDetailInfo",
+      method: "GET",
+      data: {
+        orderid
+      }
+    });
+  }
+  updateOrderStatus({ orderid, personid, status }) {
+    return this.request({
+      url: "updateOrderStatus",
+      method: "POST",
+      data: {
+        orderid,
+        personid,
+        status
+      }
+    });
+  }
+  updateEvaluateInfo({ orderid, starlevel, advice }) {
+    return this.request({
+      url: "updateEvaluateInfo",
+      method: "POST",
+      data: {
+        orderid,
+        starlevel,
+        advice
+      }
+    });
+  }
 }
 
 const getDetails = new Details();

@@ -2,8 +2,8 @@
  * @Autor: Wsy
  * @Description: 首页
  * @Date: 2020-02-21 09:21:04
- * @LastEditors: Wsy
- * @LastEditTime: 2020-02-23 05:55:21
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-03-03 16:02:05
  -->
 <view class="index_page" hover-class="none" hover-stop-propagation="false">
 
@@ -23,7 +23,7 @@
   </view>
   <!-- 主体内容 -->
   <view class="main" hover-class="none" hover-stop-propagation="false">
-   
+
     <!-- <van-overlay show="{{ authorization }}" bind:click="onClickHide">
       <view class="wrapper">
         <view class="block" catch:tap="noop" />
@@ -36,13 +36,22 @@
       <!-- 循环列表 -->
       <view class="card-primary-item" hover-class="none" hover-stop-propagation="false" wx:for="{{list}}" wx:key="id">
         <v-card type="primary" title="{{item.courtname}}" statusType="{{item.status}}" cardId="{{item.id}}"
-          l-img-class="right-card" position="left" image="{{item.image[0]}}" imagesList="{{item.image}}">
-          <view class="content">{{item.addressname}}</view>
+          l-img-class="right-card" position="left" image="{{item.image[0]}}" imagesList="{{item.image}}"
+          orderAllowNumber="{{item.orderAllowNumber}}" starlevelAvg="{{item.starlevelAvg}}">
+          <view class="content">
+            <view class="content_item">
+              {{item.addressname}}
+            </view>
+            <view class="content_item star">
+              <van-rate value="{{ item.starlevelAvg }}" size="{{ 15 }}" color="#FFD335" void-color="#F1F1F1"
+                void-icon="star" readonly />
+            </view>
+          </view>
         </v-card>
       </view>
-      <!-- <view style="width: 100rpx;height: 2000rpx;background-color: red;">
+      <!-- <view style=" width: 100rpx;height: 2000rpx;background-color: red;">
 
-      </view> -->
+            </view> -->
 
 
       <view class="scroll-bootom" hover-class="none" hover-stop-propagation="false"></view>

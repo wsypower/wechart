@@ -10,6 +10,13 @@ const app = getApp();
 import getUser from "../../http/api/getuser";
 import user_login from "../../http/api/login";
 Page({
+  onShareAppMessage() {
+    return {
+      title: "活动用房预约",
+      imageUrl: "/images/share.jpg",
+      path: "/pages/home/home"
+    };
+  },
   data: {
     PageCur: "index",
     StatusBar: app.globalData.StatusBar,
@@ -18,15 +25,13 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse("button.open-type.getUserInfo"),
     overlay: false,
-    userInfo: {}
+    userInfo: {},
+    personid: app.globalData.personid
   },
   getUserInfo: function(e) {
     app.globalData.userInfo = e.detail.userInfo;
     const { nickName, avatarUrl } = e.detail.userInfo;
-    wx.setStorage({
-      key: "userInfo",
-      data: e.detail.userInfo
-    });
+    wx.setStorageSync("userInfo", e.detail.userInfo);
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true,
@@ -35,6 +40,9 @@ Page({
     user_login
       .addUserInfo({ personname: nickName, headimagepath: avatarUrl })
       .then(({ personid }) => {
+        this.setData({
+          personid
+        });
         wx.setStorage({
           key: "personid",
           data: personid
@@ -47,7 +55,8 @@ Page({
   },
   navChange(e) {
     this.setData({
-      PageCur: e.currentTarget.dataset.cur
+      PageCur: e.currentTarget.dataset.cur,
+      personid: app.globalData.personid
     });
   },
   /**
@@ -102,18 +111,18 @@ Page({
     }
   },
   onReady: function() {
+    console.log(this.data.personid);
     wx.getSetting({
       success: res => {
-        if (res.authSetting["scope.userInfo"]) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-          this.setData({
-            overlay: false
-          });
-        } else {
-          this.setData({
-            overlay: true
-          });
-        }
+        res.authSetting["scope.userInfo"]
+          ? this.setData({
+              overlay: false,
+              personid: wx.getStorageSync("personid")
+            })
+          : this.setData({
+              overlay: true,
+              personid: wx.getStorageSync("personid")
+            });
       }
     });
   }
