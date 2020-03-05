@@ -44,6 +44,11 @@ Page({
       Toast("请选择预约时间再提交预约！");
       return;
     }
+    Toast.loading({
+      duration: 0,
+      mask: false,
+      message: "加载中..."
+    });
     const personid = wx.getStorageSync("personid");
     getDetails
       .saveOrderInfo({
@@ -53,6 +58,7 @@ Page({
         timeinterval: this.data.interval
       })
       .then(res => {
+        Toast.clear();
         console.log(res);
         wx.lin.showToast({
           title: "预约成功",
@@ -65,6 +71,7 @@ Page({
         }, 500);
       })
       .catch(err => {
+        Toast.clear();
         wx.lin.showToast({
           title: "预约失败",
           icon: "error"
