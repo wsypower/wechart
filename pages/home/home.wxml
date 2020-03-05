@@ -6,7 +6,7 @@
  * @LastEditTime: 2020-02-23 21:20:18
  -->
 <!-- ───  头部   ─────────────────────────────────────────── START ──────────── -->
-<van-overlay bind:click="onClickHide" show="{{ overlay }}" z-index="{{10000}}">
+<!-- <van-overlay bind:click="onClickHide" show="{{ overlay }}" z-index="{{10000}}">
     <view class="overlay" hover-class="none" hover-stop-propagation="false">
         <view class="overlay-warp shadow" hover-class="none" hover-stop-propagation="false">
             <view class="heder_capsule bg-gradual-blue" hover-class="none" hover-stop-propagation="false">
@@ -15,13 +15,12 @@
                 <image class="" src="/images/rote.png" mode="widthFix" lazy-load="false" binderror="" bindload="">
 
                 </image>
-                <!-- <van-image width="423rpx" height="376.5rpx" src="/images/rote.png" /> -->
             </view>
             <button open-type="getUserInfo" bindgetuserinfo="getUserInfo"
                 class='xxl cu-btn round bg-blue shadow capsule-btn'>获取头像昵称</button>
         </view>
     </view>
-</van-overlay>
+</van-overlay> -->
 
 
 <v-custom bgColor="bg-gradual-blue" wx:if="{{PageCur=='index'}}">
@@ -32,17 +31,13 @@
 
 <!-- ─── 内容区域 ─────────────────────────────────────────── START ──────────── -->
 <block wx:if="{{TabBar}}">
-
-
     <van-toast id="van-toast" />
     <view class="home_container" style="height:calc(100vh - {{CustomBar}}px - {{TabBar}}px)" hover-class="none"
         hover-stop-propagation="false">
-
         <!-- <index wx:if="{{PageCur=='index'}}"></index>
-        <my wx:if="{{PageCur=='my'}}"></my> -->
+        <my wx:if="{{PageCur=='my'}}"> wx:if="{{personid}}"</my> -->
         <index class="{{PageCur=='index'?'':'hiden'}}"></index>
-        <my class="{{PageCur=='my'?'':'hiden'}}" TabBar="{{TabBar}}" wx:if="{{personid}}" CustomBar="{{CustomBar}}"
-            userInfo="{{userInfo}}">
+        <my class="{{PageCur=='my'?'':'hiden'}}" TabBar="{{TabBar}}" CustomBar="{{CustomBar}}" userInfo="{{userInfo}}">
         </my>
     </view>
 </block>

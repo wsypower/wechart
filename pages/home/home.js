@@ -9,6 +9,7 @@
 const app = getApp();
 import getUser from "../../http/api/getuser";
 import user_login from "../../http/api/login";
+import { promisic } from "../../utils/common";
 Page({
   onShareAppMessage() {
     return {
@@ -28,7 +29,7 @@ Page({
     userInfo: {},
     personid: app.globalData.personid
   },
-  getUserInfo: function(e) {
+  getUserInfo(e) {
     app.globalData.userInfo = e.detail.userInfo;
     const { nickName, avatarUrl } = e.detail.userInfo;
     wx.setStorageSync("userInfo", e.detail.userInfo);
@@ -75,11 +76,33 @@ Page({
       });
     }).exec();
   },
-
-  onLoad: function() {
+  /**
+   * @description 判断用户有没有授权登录过
+   * @author weiyafei
+   * @date 2020-03-05-14:20:51
+   */
+  hasUserInfoPermissions() {
+    return promisic(wx.getSetting)().then(res => {
+      const authUserInfo = res.authSetting["scope.userInfo"];
+      authUserInfo
+        ? this.setData({
+            overlay: false,
+            personid: wx.getStorageSync("personid")
+          })
+        : this.setData({
+            overlay: true,
+            personid: wx.getStorageSync("personid")
+          });
+      return Boolean(authUserInfo);
+    });
+  },
+  async onLoad() {
     // 获取底部操作栏高度
     this.getRect();
     console.log("进入页面");
+    // 判断用户有没有授权登录过
+    const hasOverlay = await this.hasUserInfoPermissions();
+    app.globalData.overlay = !hasOverlay;
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -110,20 +133,5 @@ Page({
       });
     }
   },
-  onReady: function() {
-    console.log(this.data.personid);
-    wx.getSetting({
-      success: res => {
-        res.authSetting["scope.userInfo"]
-          ? this.setData({
-              overlay: false,
-              personid: wx.getStorageSync("personid")
-            })
-          : this.setData({
-              overlay: true,
-              personid: wx.getStorageSync("personid")
-            });
-      }
-    });
-  }
+  onReady: function() {}
 });

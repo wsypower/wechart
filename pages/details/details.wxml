@@ -112,6 +112,7 @@
     <!-- ─── 内容区域 ────────────────────────────────────────── ─  END  ──────────── -->
 
     <!-- ─── 底部     ─────────────────────────────────────────── START ──────────── -->
+
     <view class="footer" hover-class="none" hover-stop-propagation="false">
         <!-- 预约过的--显示时间 -->
         <view wx:if="{{orderedtime}}" class="footer-text text-grey" hover-class="none" hover-stop-propagation="false">
@@ -129,11 +130,16 @@
             hover-stop-propagation="false">
         </view>
         <view class="footer-btn" hover-class="none" hover-stop-propagation="false">
-            <button class="cu-btn round bg-green shadow" wx:if="{{detailInfo.status==2 && !orderedtime}}"
+
+        </view>
+        <view class="footer-btn" hover-class="none" hover-stop-propagation="false">
+            <button open-type="getUserInfo" bindgetuserinfo="getUserInfo" wx:if="{{overlay}}"
+                class="cu-btn round bg-green shadow">请先授权登录</button>
+            <button class="cu-btn round bg-green shadow" wx:if="{{detailInfo.status==2 && !orderedtime &&!overlay}}"
                 bindtap="applyClickHandler">立即预约</button>
-            <button class="cu-btn round bg-blue shadow" wx:if="{{detailInfo.status==4}}"
+            <button class="cu-btn round bg-blue shadow" wx:if="{{detailInfo.status==4 &&!overlay}}"
                 bindtap="applyClickHandler">已结束</button>
-            <button class="cu-btn round gray shadow text-grey" wx:if="{{detailInfo.status==3}}"
+            <button class="cu-btn round gray shadow text-grey" wx:if="{{detailInfo.status==3 &&!overlay}}"
                 bindtap="applyClickHandler">已下线</button>
         </view>
     </view>

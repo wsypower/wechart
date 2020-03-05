@@ -1,7 +1,9 @@
 // pages/my/my.js
 const app = getApp();
 import my from "../../http/api/my";
-
+import { promisic } from "../../utils/common";
+import Toast from "../../miniprogram_npm/@vant/weapp/toast/toast";
+import user_login from "../../http/api/login";
 Component({
   /**
    * @description 接受全局样式
@@ -12,7 +14,6 @@ Component({
     styleIsolation: "shared"
   },
   properties: {
-    userInfo: Object,
     TabBar: Number,
     CustomBar: Number
   },
@@ -26,6 +27,9 @@ Component({
     active: 1,
     status: 1,
     tablen: 0,
+    userInfo: null,
+    overlay: false,
+    personid: null,
     tabs: [
       { nav: "待确认", status: 1, data: [] },
       { nav: "待评价", status: 2, data: [] },
@@ -33,13 +37,15 @@ Component({
     ]
   },
   lifetimes: {
-    attached() {
+    async attached() {
+      await this.hasUserInfoPermissions();
       this.getData();
     }
   },
   pageLifetimes: {
     async show() {
       // 页面被展示
+      await this.hasUserInfoPermissions();
       this.getData();
     },
     hide() {
@@ -47,6 +53,65 @@ Component({
     }
   },
   methods: {
+    hasUserInfoPermissions() {
+      return promisic(wx.getSetting)()
+        .then(res => {
+          const authUserInfo = res.authSetting["scope.userInfo"];
+          authUserInfo
+            ? this.setData({
+                overlay: false,
+                personid: wx.getStorageSync("personid")
+              })
+            : this.setData({
+                overlay: true,
+                personid: wx.getStorageSync("personid")
+              });
+          return authUserInfo;
+        })
+        .then(res => {
+          app.globalData.overlay = !Boolean(res);
+          if (res) {
+            return promisic(wx.getUserInfo)().then(res => {
+              this.setData({
+                userInfo: res.userInfo
+              });
+            });
+          }
+          return res;
+        });
+    },
+    // 获取用户信息
+    getUserInfo(e) {
+      console.log("获取授权>>>>>>>>>>>>>>>>", e);
+      if (!e.detail.userInfo) {
+        return;
+      }
+      app.globalData.userInfo = e.detail.userInfo;
+      app.globalData.overlay = false;
+      const { nickName, avatarUrl } = e.detail.userInfo;
+      wx.setStorageSync("userInfo", e.detail.userInfo);
+      this.setData({
+        userInfo: e.detail.userInfo,
+        hasUserInfo: true,
+        overlay: false
+      });
+      user_login
+        .addUserInfo({ personname: nickName, headimagepath: avatarUrl })
+        .then(({ personid }) => {
+          this.setData({
+            personid
+          });
+          wx.setStorage({
+            key: "personid",
+            data: personid
+          });
+          app.globalData.personid = personid;
+          this.getData();
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
     //点击图片
     imageClickHandler(e) {
       const images = e.currentTarget.dataset.img;
@@ -57,11 +122,22 @@ Component({
     },
     onChange(event) {
       console.log(event);
+      if (this.data.overlay) {
+        wx.lin.showToast({
+          title: "请先登录！",
+          icon: "error",
+          placement: "right"
+        });
+        return;
+      }
       this.data.tablen = event.detail.index;
       this.data.status = event.detail.name;
       this.getData();
     },
     getData() {
+      if (this.data.overlay) {
+        return;
+      }
       let personid = wx.getStorageSync("personid");
       let status = this.data.status;
       const _this = this;

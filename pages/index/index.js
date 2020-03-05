@@ -20,6 +20,7 @@ Component({
   data: {
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
+
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse("button.open-type.getUserInfo"),
@@ -38,7 +39,8 @@ Component({
     // 暂无数据
     nodata: false,
     //下拉刷新
-    refresher: false
+    refresher: false,
+    overlay: false
   },
 
   /* -----------------------------  Page 生命周期  --------------------------------- */

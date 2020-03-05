@@ -10,13 +10,16 @@
     <view class="UCenter-bg bg-gradual-blue">
         <!-- <image src="/images/logo.png" class="png" mode="widthFix"></image> -->
         <view class="cu-avatar round xl  shadow" style="background-image:url({{userInfo.avatarUrl}});">
-            <view
+            <text wx:if="{{overlay}}" class="cuIcon-people"></text>
+            <view wx:if="{{!overlay}}"
                 class="cu-tag-size capsule cu-tag badge shadow {{userInfo.gender==1?'cuIcon-male bg-blue':'cuIcon-female bg-pink'}}">
             </view>
         </view>
 
         <view class="margin-top-sm">
-            <text class="texr-white text-shadow text-xl">{{userInfo.nickName}}</text>
+            <button open-type="getUserInfo" bindgetuserinfo="getUserInfo" wx:if="{{overlay}}"
+                class=' cu-btn round line-white capsule-btn'>授权/登录</button>
+            <text wx:if="{{!overlay}}" class=" text-white text-shadow text-xl">{{userInfo.nickName}}</text>
         </view>
         <image src="/images/wave.gif" mode="scaleToFill" class="gif-wave"></image>
     </view>
@@ -72,7 +75,7 @@
         </van-tabs>
     </view>
 </view>
-
+<l-toast />
 <!-- <view class="padding flex text-center text-grey bg-white shadow-warp">
     <view class="flex flex-sub flex-direction solid-right">
         <view class="text-xxl text-orange">123</view>

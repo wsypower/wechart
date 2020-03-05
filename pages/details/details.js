@@ -7,6 +7,7 @@
  */
 import getDetails from "../../http/api/details";
 import Toast from "../../miniprogram_npm/@vant/weapp/toast/toast";
+import user_login from "../../http/api/login";
 const app = getApp();
 Page({
   onShareAppMessage() {
@@ -20,6 +21,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    overlay: false,
     detailsId: null,
     images: null,
     status: null,
@@ -93,10 +95,38 @@ Page({
       });
     });
   },
+  // 获取用户信息
+  getUserInfo(e) {
+    if (!e.detail.userInfo) {
+      return;
+    }
+    app.globalData.userInfo = e.detail.userInfo;
+    app.globalData.overlay = false;
+    const { nickName, avatarUrl } = e.detail.userInfo;
+    wx.setStorageSync("userInfo", e.detail.userInfo);
+    this.setData({
+      overlay: false
+    });
+    user_login
+      .addUserInfo({ personname: nickName, headimagepath: avatarUrl })
+      .then(({ personid }) => {
+        wx.setStorage({
+          key: "personid",
+          data: personid
+        });
+        app.globalData.personid = personid;
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   async onLoad() {
+    this.setData({
+      overlay: app.globalData.overlay
+    });
     Toast.loading({
       duration: 0,
       mask: false,
@@ -114,8 +144,6 @@ Page({
       starlevelAvg,
       orderAllowNumber
     });
-    console.log(this.data.starlevelAvg);
-    console.log(this.data.orderAllowNumber);
     await this.getDetails();
     Toast.clear();
   }
